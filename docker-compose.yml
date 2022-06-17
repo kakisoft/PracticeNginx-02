@@ -5,7 +5,19 @@ services:
     container_name: nginx
     ports:
       - "8000:80"
+    depends_on:
+      - php
     volumes:
       - ./containers/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./src:/var/www/src
+
+  php:
+    container_name: php
+    build: ./containers/php
+    volumes:
+      - ./src:/var/www/src
+    working_dir: /var/www/src
+    user: www-data
+    environment:
+      - APP_ENV=local
 
