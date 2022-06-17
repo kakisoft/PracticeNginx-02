@@ -1,0 +1,4 @@
+PracticeNginx(PHP)
+<?php
+phpinfo();
+
