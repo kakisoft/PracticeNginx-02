@@ -25,39 +25,93 @@ docker-compose down --rmi all --volumes
 ```
 
 ________________________________________________________________________________________
-## vi install
+## Util Package install
+※OS(Debian)のバージョンに注意
+
+### vi install
 ```
-apt-get update
-apt-get install -y vim
+apt update
+apt install -y vim
 ```
 
-## ping install
+### ping install
 ```
-apt-get update
-apt-get install -y iputils-ping
+apt update
+apt install -y iputils-ping
 ```
-____________________________________________________________
-## Access
+
+
+________________________________________________________________________________________
+## Access URL
 http://localhost:8000/
 
 
-## PHP Accesscheck
+________________________________________________________________________________________
+### Nginx：コンフィグファイルをチェック
+nginx -t
 ```
-ping php
+（出力例）
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
+### Nginx：バージョン確認
+nginx -V
+```
+（出力例）
+nginx version: nginx/1.15.6
+built by gcc 6.3.0 20170516 (Debian 6.3.0-18+deb9u1)
+built with OpenSSL 1.1.0f  25 May 2017
+TLS SNI support enabled
+configure arguments: （以下略）
+```
+## Nginx：プロセスの状態を確認
+nginx -t
+nginx -T  （長い）
+```
+（出力例）
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+# configuration file /etc/nginx/nginx.conf:
 
-## log
+※長ったらしくて見づらい
+```
+
+### 再起動
+nginx
+
+
+### 停止（実行したらコンテナが落ちる？）
+nginx -s stop
+
+
+
+
+## nginx log
 ```
 /var/log/nginx/access.log
 /var/log/nginx/error.log
 ```
 
-________________________________________________________________________________________
-________________________________________________________________________________________
-________________________________________________________________________________________
-________________________________________________________________________________________
-________________________________________________________________________________________
+
+____________________________________________________________
+## PHP Accesscheck
+※ping コマンドをインストールしておく
+```
+ping php
+```
 
 
 
+________________________________________________________________________________________
+________________________________________________________________________________________
+________________________________________________________________________________________
+________________________________________________________________________________________
+________________________________________________________________________________________
+## note
+Docker コンテナ内で nginx コマンドを叩いて再起動したりするのは、止めといた方が良さそう。  
+コンテナそのものを再起動で。  
+
+Nginx のコンテナは最新のバージョン or latest を指定。  
+OSのバージョンのせいか、aptが上手く動かない（パッケージのいくつかが Not Found）
+# image: nginx:1.15.6    # パッケージが古いせいか、aptが上手く動かない（パッケージのいくつかが Not Found）

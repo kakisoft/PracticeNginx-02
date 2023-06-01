@@ -1,8 +1,9 @@
 version: '3'
 services:
   nginx:
-    image: nginx:1.15.6
-    container_name: nginx
+    container_name: nginx_02
+    # image: nginx:1.15.6    # OSのバージョンのせいか、aptが上手く動かない（パッケージのいくつかが Not Found）
+    image: nginx:1.25.0
     ports:
       - "8000:80"
     depends_on:
@@ -12,7 +13,7 @@ services:
       - ./src:/var/www/src
 
   php:
-    container_name: php
+    container_name: php_nginx_02
     build: ./containers/php
     volumes:
       - ./src:/var/www/src
