@@ -3,7 +3,8 @@ services:
   nginx:
     container_name: nginx_02
     # image: nginx:1.15.6    # OSのバージョンのせいか、aptが上手く動かない（パッケージのいくつかが Not Found）
-    image: nginx:1.25.0
+    # image: nginx:1.25.0    # パッケージインストールため、nginx ディレクトリに移動
+    build: ./containers/nginx
     ports:
       - "8000:80"
     depends_on:
