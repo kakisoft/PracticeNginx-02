@@ -12,6 +12,8 @@ services:
     volumes:
       - ./containers/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./src:/var/www/src
+      # - ./containers/nginx/share_internal/etc/nginx:/etc/nginx:ro              # エラー出た。ro オプション付けてもNG
+      # - ./containers/nginx/share_internal/usr/share/nginx:/usr/share/nginx:ro  # エラー出た。ro オプション付けてもNG
 
   php:
     container_name: php_nginx_02
