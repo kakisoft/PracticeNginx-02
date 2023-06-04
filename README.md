@@ -7,6 +7,7 @@ PHP を追加。
 ## containers running / terminating
 ```
 docker-compose up -d
+docker-compose up -d --build
 docker-compose down
 ```
 
